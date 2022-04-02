@@ -1,0 +1,31 @@
+{
+  "python.linting.mypyEnabled": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.testing.pytestEnabled": true,
+
+  "python.testing.autoTestDiscoverOnSaveEnabled": false,
+  "python.testing.pytestArgs": ["--no-cov"],
+
+  "editor.rulers": [
+    99
+  ],
+
+  "search.exclude": {
+    ".pytest_cache": true,
+    ".venv": true,
+    "**/*/__pycache__": true,
+    ".mypy_cache": true,
+    ".coverage": true,
+    "coverage.xml": true
+  },
+  "files.exclude": {
+    ".pytest_cache": true,
+    ".venv": true,
+    "**/*/__pycache__": true,
+    ".mypy_cache": true,
+    ".coverage": true,
+    "coverage.xml": true
+  }
+}
+
