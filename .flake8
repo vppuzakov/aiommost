@@ -1,0 +1,30 @@
+[flake8]
+exclude = tests/*
+ignore =
+    D100,    # missing module docstring
+    D101,    # missing public class docstring
+    D102,    # missing docstring in a public method
+    D103,    # missing docstring in a public function
+    D104,    # missing docstring in a public package
+    D105,    # missing docstring in a magic method
+    D107,    # missing docstring in an init method
+    DAR101,  # missing parameter in a docstring
+    DAR201,  # missing returns in docstring
+    WPS110,  # wrong variable name
+    WPS115,  # false-positive: upper case constants in enums
+    WPS125,  # buildit shadowing
+    WPS201,  # found module with too many imports
+    WPS214,  # disable: too many methods
+    WPS226,  # disable: found string constant overuse
+    WPS229,  # too long try body
+    WPS305,  # disable: f-string prohibited
+    WPS306,  # disable: class without a base class
+    WPS323,  # false-positive: %% sign in logging formatting
+    WPS410,  # disable: __all__ at init py not allowed
+    WPS412,  # false-positive: init py with logic
+    WPS531,  # false-positive: simplified if return
+
+max-module-members = 12
+max-local-variables = 9
+max-line-length = 99
+
