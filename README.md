@@ -27,4 +27,3 @@ Before push:
 $ make lint && make test
 ...
 ```
-
