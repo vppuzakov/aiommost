@@ -7,6 +7,7 @@ ignore =
     D103,    # missing docstring in a public function
     D104,    # missing docstring in a public package
     D105,    # missing docstring in a magic method
+    D106,    # missing docsting in nested class
     D107,    # missing docstring in an init method
     DAR101,  # missing parameter in a docstring
     DAR201,  # missing returns in docstring
@@ -27,4 +28,3 @@ ignore =
 max-module-members = 12
 max-local-variables = 9
 max-line-length = 99
-
