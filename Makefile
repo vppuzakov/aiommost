@@ -17,4 +17,3 @@ build:
 
 publish:
 	@flit publish
-
