@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: postgres:14
+    volumes:
+      - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
+    env_file: .env
+
+  mattermost:
+    image: mattermost/mattermost-team-edition
+    env_file: .env
+    ports:
+      - 8065:8065
+      - 8067:8067
+      - 8074:8074
+      - 8075:8075
+    volumes:
+      - ./mattermost/config:/mattermost/config
