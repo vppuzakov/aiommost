@@ -1,6 +1,7 @@
 pytest_plugins = (
     'tests.fixtures.client',
     'tests.fixtures.fake',
+    'tests.fixtures.channels',
     'tests.fixtures.users',
 )
 

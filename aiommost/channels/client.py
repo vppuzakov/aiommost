@@ -1,7 +1,8 @@
 import orjson
 from httpx import AsyncClient
 
-from aiommost import errors, schemas
+from aiommost import errors
+from aiommost.channels.schemas import Channel
 
 
 class ChannelsClient:
@@ -9,7 +10,7 @@ class ChannelsClient:
     def __init__(self, session: AsyncClient) -> None:
         self.session = session
 
-    async def create_direct(self, first: str, second: str) -> schemas.Channel:
+    async def create_direct(self, first: str, second: str) -> Channel:
         """Create direct channel between users."""
         url = '/channels/direct'
         request = [first, second]
@@ -18,4 +19,4 @@ class ChannelsClient:
         errors.validate(response)
 
         channel = orjson.loads(response.content)
-        return schemas.Channel(**channel)
+        return Channel(**channel)

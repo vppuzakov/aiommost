@@ -15,6 +15,7 @@ ignore =
     WPS115,  # false-positive: upper case constants in enums
     WPS125,  # buildit shadowing
     WPS201,  # found module with too many imports
+    WPS211,  # too many arguments
     WPS214,  # disable: too many methods
     WPS226,  # disable: found string constant overuse
     WPS229,  # too long try body
