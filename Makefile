@@ -13,7 +13,6 @@ test:
 
 build:
 	@flit build --no-setup-py
-	@chmod 444 dist/*
 
 publish:
 	@flit publish

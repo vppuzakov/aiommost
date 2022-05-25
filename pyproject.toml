@@ -8,8 +8,9 @@ name = "aiommost"
 [project]
 name = "aiommost"
 authors = [
-    {name = "Vladimir Puzakov", email = "puzakov@rambler.ru"},
+    {name = "Vladimir Puzakov", email = "vppuzakov@rambler.ru"},
 ]
+readme = "README.md"
 classifiers=[
     'Development Status :: 4 - Beta',
     'Environment :: Web Environment',
