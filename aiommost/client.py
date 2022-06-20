@@ -7,8 +7,9 @@ from aiommost.users.client import UsersClient
 
 class MattermostClient:
 
-    def __init__(self, host: str, token: str) -> None:
+    def __init__(self, host: str, token: str, verify: bool | str = True) -> None:
         self.token = token
+        self.verify = verify
 
         self.session = httpx.AsyncClient(
             base_url=f'{host}/api/v4',
@@ -16,6 +17,7 @@ class MattermostClient:
                 'Authorization': f'Bearer {token}',
                 'Content-Type': 'application/json',
             },
+            verify=verify,
         )
 
         self.channels = ChannelsClient(self.session)
