@@ -11,8 +11,11 @@ lint:
 test:
 	@pytest
 
-build:
+build: clean
 	@flit build --no-setup-py
 
-publish:
+clean:
+	@rm -rf dist
+
+publish: build
 	@flit publish
