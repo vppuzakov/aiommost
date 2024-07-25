@@ -14,6 +14,6 @@ class Channel(Schema):
     display_name: str
     header: str
     purpose: str
-    msg_count: Optional[int] = Field(alias='total_message_count')
+    msg_count: Optional[int] = Field(alias='total_msg_count')
     creator_id: str
     last_post_at: datetime
