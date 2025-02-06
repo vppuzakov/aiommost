@@ -38,3 +38,15 @@ async def test_get_by_usernames(client: MattermostClient, create_user):
 
     users = await client.users.get_by_usernames([first_user.username, second_user.username])
     assert len(users) == 2
+
+
+async def test_get_by_id_found(client: MattermostClient, create_user):
+    existing_user: User = await create_user()
+
+    user = client.users.get_by_id(existing_user.uid)
+    assert existing_user.uid == user.uid
+
+
+async def test_get_by_id_not_found(fake, client: MattermostClient):
+    with pytest.raises(BadRequestError):
+        await client.users.get_by_id(fake.pystr())

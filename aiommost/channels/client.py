@@ -20,3 +20,13 @@ class ChannelsClient:
 
         channel = orjson.loads(response.content)
         return Channel(**channel)
+
+    async def get_by_id(self, channel_id: str) -> Channel:
+        """Get channel info by channel id."""
+        url = f'/channels/{channel_id}'
+
+        response = await self.session.get(url)
+        errors.validate(response)
+
+        channel = orjson.loads(response.content)
+        return Channel(**channel)
