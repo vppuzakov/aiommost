@@ -4,7 +4,7 @@ from aiommost.schemas import Schema
 
 
 class Post(Schema):
-    uid: str = Field(alias='id')
+    uid: str = Field(alias="id")
     user_id: str
     channel_id: str
     root_id: str

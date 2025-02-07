@@ -3,9 +3,11 @@ import pytest
 from aiommost.client import MattermostClient
 
 
-@pytest.fixture()
+@pytest.fixture
 def create_user(client: MattermostClient, fake):
-    async def inner(username: str = None, email: str = None, password: str = None):
+    async def inner(username: str | None = None,
+                    email: str | None = None,
+                    password: str | None = None):
         return await client.users.create(
             username=username or fake.pystr().lower(),
             email=email or fake.email(),

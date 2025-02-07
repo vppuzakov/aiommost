@@ -12,7 +12,7 @@ class ChannelsClient:
 
     async def create_direct(self, first: str, second: str) -> Channel:
         """Create direct channel between users."""
-        url = '/channels/direct'
+        url = "/channels/direct"
         request = [first, second]
 
         response = await self.session.post(url, content=orjson.dumps(request))

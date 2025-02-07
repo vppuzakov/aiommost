@@ -24,13 +24,13 @@ Main dependencies:
 Developer dependencies:
 
 - `mypy`
-- `wemake-python-styleguide`
+- `ruff`
 - `pytest`
 
 Install dependencies:
 
 ```bash
-make dev.install
+make dev.activate env=dev
 ```
 
 Before push:

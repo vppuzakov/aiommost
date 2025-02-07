@@ -12,10 +12,10 @@ class MattermostClient:
         self.verify = verify
 
         self.session = httpx.AsyncClient(
-            base_url=f'{host}/api/v4',
+            base_url=f"{host}/api/v4",
             headers={
-                'Authorization': f'Bearer {token}',
-                'Content-Type': 'application/json',
+                "Authorization": f"Bearer {token}",
+                "Content-Type": "application/json",
             },
             verify=verify,
         )
