@@ -31,5 +31,5 @@ clean:
 	@rm -rf dist
 
 
-publish: build
+publish: ci.build
 	@python3 -m hatch publish
