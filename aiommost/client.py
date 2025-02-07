@@ -2,6 +2,7 @@ import httpx
 
 from aiommost.channels.client import ChannelsClient
 from aiommost.posts.client import PostClient
+from aiommost.teams.client import TeamClient
 from aiommost.users.client import UsersClient
 
 
@@ -22,6 +23,7 @@ class MattermostClient:
 
         self.channels = ChannelsClient(self.session)
         self.posts = PostClient(self.session)
+        self.teams = TeamClient(self.session)
         self.users = UsersClient(self.session)
 
     async def close(self) -> None:

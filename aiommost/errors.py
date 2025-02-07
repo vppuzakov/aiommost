@@ -18,11 +18,11 @@ class BadRequestError(ClientError):
 
 
 def validate(response: Response) -> None:
-    if response.status_code == codes.BAD_REQUEST:
+    if response.status_code in {codes.BAD_REQUEST, codes.NOT_FOUND}:
         error = orjson.loads(response.content)
         raise BadRequestError(
             code=error["id"],
-            request_id=error["request_id"],
+            request_id=error.get("request_id"),
             message=error["message"],
             detailed=error["detailed_error"],
         )
