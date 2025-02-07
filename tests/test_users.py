@@ -43,7 +43,7 @@ async def test_get_by_usernames(client: MattermostClient, create_user):
 async def test_get_by_id_found(client: MattermostClient, create_user):
     existing_user: User = await create_user()
 
-    user = client.users.get_by_id(existing_user.uid)
+    user = await client.users.get_by_id(existing_user.uid)
     assert existing_user.uid == user.uid
 
 
