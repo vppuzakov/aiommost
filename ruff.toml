@@ -1,0 +1,52 @@
+target-version = "py310"
+line-length = 99
+
+[lint]
+select = ["ALL"]
+ignore = [
+  "ANN002",  # disable: missing annotation for args
+  "ANN003",  # disable: missing annotation for kwargs
+  "D100",    # disable: missing docstring from public module
+  "D101",    # disable: missing docstring in public class
+  "D102",    # disable: missing docstring in public method
+  "D103",    # disable: missing docstring in public function
+  "D104",    # disable: missing docstring in public package
+  "D106",    # disable: missing docstring in public nested class
+  "D107",    # disable: missing docstring in __init__
+  "D203",    # disable: ignore one blank line before class
+  "D213",    # disable: ignore multi line summary second line
+  "FBT001",  # disable: positional boolean arg in func
+  "FBT002",  # disable: positional boolean arg in method
+  "FIX002",  # disable: fix todo comments
+  "N806",    # disable: uppercase variable names
+  "PD901",   # disable: allow df name
+  "PLR0913",
+  "RUF001",
+  "RUF002",  # disable: cyrillic symbols not allowed
+  "S608",
+  "TC001",  # disable: move application import into type checking block
+  "TC002",  # disable: move third-party into type checking block
+  "TC003",  # disable: move standard lib import into type checking block
+]
+unfixable = [
+]
+
+[lint.isort]
+known-first-party = ["aiommost"]
+
+[lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[lint.per-file-ignores]
+# Tests can use magic values, assertions, and relative imports
+"tests/**/*" = [
+    "E501",    # disable: TBD
+    "ANN201",  # disable: missing return type annotation in public function
+    "ANN001",  # disable: missing type annotation in public function
+    "ANN202",  # disable: missing type annotation in private function
+    "ARG001",  # disable: unused mock fixtures in tests
+    "F403",    # disable: allow from module import * in test fixtures
+    "PLR2004", # disable: magic value used in comparison
+    "S101",    # disable: assert found
+    "SLF001",  # disable: allow access to private fields in tests
+]

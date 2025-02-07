@@ -1,5 +1,5 @@
-from aiommost.client import MattermostClient
 from aiommost.channels.schemas import Channel
+from aiommost.client import MattermostClient
 
 
 async def test_post_created(fake, client: MattermostClient, create_direct_channel):

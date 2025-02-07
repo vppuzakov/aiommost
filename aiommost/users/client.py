@@ -12,11 +12,11 @@ class UsersClient:
 
     async def create(self, username: str, email: str, password: str) -> User:
         """Add new user with specified username."""
-        url = '/users'
+        url = "/users"
         request = {
-            'username': username,
-            'email': email,
-            'password': password,
+            "username": username,
+            "email": email,
+            "password": password,
         }
 
         response = await self.session.post(url, content=orjson.dumps(request))
@@ -26,14 +26,14 @@ class UsersClient:
         return User(**user)
 
     async def delete(self, uid: str, permanent: bool = False) -> None:
-        url = f'/users/{uid}'
+        url = f"/users/{uid}"
 
-        response = await self.session.delete(url, params={'permanent': permanent})
+        response = await self.session.delete(url, params={"permanent": permanent})
         errors.validate(response)
 
     async def get_by_usernames(self, usernames: list[str]) -> list[User]:
         """Get users with specified usernames."""
-        url = '/users/usernames'
+        url = "/users/usernames"
         request = usernames
 
         response = await self.session.post(url, content=orjson.dumps(request))
@@ -44,7 +44,7 @@ class UsersClient:
 
     async def get_by_username(self, username: str) -> User:
         """Get user with specified username."""
-        url = f'/users/username/{username}'
+        url = f"/users/username/{username}"
 
         response = await self.session.get(url)
         errors.validate(response)

@@ -1,16 +1,22 @@
 [build-system]
-requires = ["flit"]
-build-backend = "flit.buildapi"
-
-[tool.flit.module]
-name = "aiommost"
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
 [project]
 name = "aiommost"
+dynamic = ["version"]
+description = "Mattermost client"
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+keywords = [
+    "mattermost",
+    "asyncio",
+    "client",
+]
 authors = [
     {name = "Vladimir Puzakov", email = "vppuzakov@rambler.ru"},
 ]
-readme = "README.md"
 classifiers=[
     'Development Status :: 4 - Beta',
     'Environment :: Web Environment',
@@ -20,11 +26,10 @@ classifiers=[
     'License :: OSI Approved :: BSD License',
     'Programming Language :: Python',
     'Programming Language :: Python :: 3 :: Only',
-    'Programming Language :: Python :: 3.7',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
     'Operating System :: OS Independent',
     "Topic :: Internet",
     "Topic :: Internet :: WWW/HTTP :: HTTP Servers",
@@ -38,68 +43,124 @@ classifiers=[
 dependencies = [
     "orjson",
     "httpx",
-    "pydantic",
+    "pydantic>2,<3",
 ]
-requires-python = ">=3.10.0"
-dynamic = ["version", "description"]
+
+[project.optional-dependencies]
+test = [
+    "coverage[toml]>=6.5",
+    "faker",
+    "pytest",
+    "pytest-asyncio>=0.21.1",
+    "pytest-clarity>=1.0.1",
+    "pytest-coverage>=0.0",
+    "pytest-dotenv>=0.5.2",
+    "pytest-mock>=3.14.0,<4",
+    "pytest-testdox>=3.1.0",
+]
+
+lint = [
+    "ruff",
+    "mypy",
+]
+
+dev = [
+  "python-lsp-server[all]",
+  "ruff-lsp",
+  "pylsp-mypy",
+]
+
 
 [project.urls]
 Source = "https://github.com/vppuzakov/aiommost"
 Issues = "https://github.com/vppuzakov/aiommost/issues"
 
-[project.optional-dependencies]
-test = [
-    "faker>=9.8,<10.0",
-    "pytest>=6.2,<7.0",
-    "pytest-asyncio>=0.18.3,<1",
-    "pytest-clarity>=1.0,<2",
-    "pytest-cov>=3.0,<4",
-    "pytest-dotenv>=0.5.2,<1",
-    "pytest-mock>=3.6,<4",
-    "pytest-testdox>=2,<3",
-]
-dev = [
-    "mypy>=0.910,<1",
-    "wemake_python_styleguide>=0.15.3,<1",
-]
 
-[tool.pytest.ini_options]
-norecursedirs = [
-    "hooks",
-    "*.egg",
-    ".eggs",
-    "dist",
-    "build",
-    "docs",
-    ".tox",
-    ".git",
-    "__pycache__",
+[tool.hatch.version]
+path = "aiommost/__init__.py"
+
+[tool.hatch.envs.default]
+python = "3.10"
+type = "virtual"
+
+[tool.hatch.envs.test]
+features = ["test"]
+
+[tool.hatch.envs.test.scripts]
+test = "pytest {args:tests}"
+test-cov = "coverage run -m pytest {args:tests}"
+cov-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-cov",
+  "cov-report",
 ]
 
-addopts = [
-  "--strict",
-  "--tb=short",
-  "--show-capture=log",
-  "--cov-report=term-missing:skip-covered",
-  "--cov-report=xml:coverage.xml",
-  "--cov-branch",
-  "--cov=aiommost",
-  "--testdox",
-  "--doctest-modules",
+[[tool.hatch.envs.test.matrix]]
+python = ["3.10", "3.11", "3.12", "3.13"]
+
+
+[tool.hatch.envs.lint]
+features = ["test", "lint"]
+
+
+[tool.hatch.envs.lint.scripts]
+typing = "mypy --cache-fine-grained --follow-imports normal {args:aiommost}"
+style = [
+  "ruff check --fix {args:.}",
+]
+fmt = [
+  "ruff check --fix {args:.}",
+  "style",
+]
+all = [
+  "style",
+  "typing",
 ]
 
-filterwarnings = [
-    "ignore::DeprecationWarning",
+
+[tool.hatch.envs.dev]
+python = "3.10"
+path = ".venv"
+features = ["lint", "test", "dev"]
+
+
+[tool.hatch.envs.dev.scripts]
+typing = "mypy {args:aiommost tests}"
+style = [
+  "ruff check {args:.}",
+]
+fmt = [
+  "ruff check --fix {args:.}",
+  "style",
+]
+all = [
+  "style",
+  "typing",
 ]
 
-env_override_existing_values = 1
-env_files = [".env", "test.env"]
-asyncio_mode = "auto"
 
-[tool.mypy]
-follow_imports = "silent"
-warn_redundant_casts = true
-warn_unused_ignores = true
-disallow_any_generics = true
-check_untyped_defs = true
-no_implicit_reexport = true
+[tool.coverage.run]
+source_pkgs = ["aiommost", "tests"]
+branch = true
+parallel = true
+omit = []
+
+
+[tool.coverage.paths]
+aiommost = ["aiommost", "*/aiommost/aiommost"]
+tests = ["tests", "*/aiommost/tests"]
+
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
+
+
+[tool.hatch.build.targets.wheel]
+packages = ["aiommost"]

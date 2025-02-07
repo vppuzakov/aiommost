@@ -16,18 +16,18 @@ class PostClient:
         self,
         channel_id: str,
         message: str,
-        root_id: str = None,
-        file_ids: list[str] = None,
-        props: dict[str, Any] = None,
+        root_id: str | None = None,
+        file_ids: list[str] | None = None,
+        props: dict[str, Any] | None = None,
     ) -> Post:
         """Create new post in the channel."""
-        url = '/posts'
+        url = "/posts"
         request = {
-            'channel_id': channel_id,
-            'message': message,
-            'root_id': root_id,
-            'file_ids': file_ids,
-            'props': props,
+            "channel_id": channel_id,
+            "message": message,
+            "root_id": root_id,
+            "file_ids": file_ids,
+            "props": props,
         }
 
         response = await self.session.post(url, content=orjson.dumps(request))

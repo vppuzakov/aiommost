@@ -43,6 +43,7 @@ htmlcov/
 .nox/
 .coverage
 .coverage.*
+report.xml
 .cache
 nosetests.xml
 coverage.xml
@@ -127,3 +128,6 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# mattermost volumes
+mattermost/**/*

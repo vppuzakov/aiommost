@@ -1,13 +1,12 @@
-version: "3"
 services:
   db:
     image: postgres:14
-    volumes:
-      - ./volumes/db/var/lib/postgresql/data:/var/lib/postgresql/data
     env_file: .env
+    networks:
+      - mmost
 
-  mattermost:
-    image: mattermost/mattermost-team-edition
+  mmost:
+    image: mattermost/mattermost-team-edition:release-5.39
     env_file: .env
     ports:
       - 8065:8065
@@ -16,3 +15,9 @@ services:
       - 8075:8075
     volumes:
       - ./mattermost/config:/mattermost/config
+    networks:
+      - mmost
+
+
+networks:
+  mmost:

@@ -1,8 +1,8 @@
 import pytest
 
 from aiommost.client import MattermostClient
-from aiommost.users.schemas import User
 from aiommost.errors import BadRequestError
+from aiommost.users.schemas import User
 
 
 async def test_user_created(client: MattermostClient, fake):
