@@ -51,3 +51,13 @@ class UsersClient:
 
         user = orjson.loads(response.content)
         return User(**user)
+
+    async def get_by_id(self, user_id: str) -> User:
+        """Get user by id"""
+        url = f'/users/{user_id}'
+
+        response = await self.session.get(url)
+        errors.validate(response)
+
+        user = orjson.loads(response.content)
+        return User(**user)
